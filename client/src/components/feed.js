@@ -35,19 +35,16 @@ const Feed = (props) => {
 
              if(loading) return (
                <div className="loadercenter">
-                 <i className="fa fa-cog fa-spin fa-5x" />
+                 <i className="fas fa-sync fa-spin fa-5x" />
                </div>
              )
 
              if (error) console.log(error);
 
-            //  let food = data.food.hits;
              let food = data.food.hits;
-             console.log(food);
-             
-
+          
              return (
-                <div className='d-flex flex-wrap'>
+                <div className='d-flex flex-wrap mt-5 feed'>
                      {food.map( foods => (
                    
                    <Items key={foods.recipe.uri} label={foods.recipe.label} image={foods.recipe.image} ingredients={foods.recipe.ingredients} />

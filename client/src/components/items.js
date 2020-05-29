@@ -1,27 +1,23 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Items = (props) => {
 
-    return(
-        <div className="card bg-light mb-3">
-            <div class="card-header">{props.label}</div>
-            <div class="card-body">
-                <div className="row">
-                <div className='text-center' id="Image"><img src={props.image} alt=""/></div>
-                <div className="mx-left mt-2 ml-2">
-                    <h5>Ingredients:</h5>
-                    <ul>
-                    {
-                        props.ingredients.map( ing => (
-                            <li>{ing.text}</li>
-                        ))
-                    }
-                    </ul>
+    const {label, image, ingredients} = props;
 
-                </div>
-                </div>
-            </div>    
+    
+    return(
+        <div className="container-items">
+            <p>{label}</p>
+            <Link to={{ pathname : `/details/${label}`,
+                        state : {
+                            label,
+                            image,
+                            ingredients
+                        }
+        }}><img src={image} alt={label}/></Link>
         </div>
+        
     )
 }
 
