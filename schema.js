@@ -1,0 +1,67 @@
+const {GraphQLObjectType, GraphQLString ,  GraphQLList, GraphQLSchema  } = require('graphql');
+const axios = require('axios');
+
+const API_ID = '58f8ec64';
+const API_KEY = 'f70656e827cebd9e8e5c851c7b5268c0'
+
+const FoodType = new GraphQLObjectType({
+    name: 'Food' ,
+    fields: () => ({
+        q : { type : GraphQLString},
+        hits : { type: GraphQLList(HitsType)}
+    })
+})
+
+const HitsType = new GraphQLObjectType({
+    name: 'Hits',
+    fields: () => ({
+        recipe : { type : RecipesType},
+
+    })
+})
+
+const RecipesType = new GraphQLObjectType({
+    name: 'Recipes',
+    fields : () => ({
+        uri : { type : GraphQLString},
+        label: { type : GraphQLString},
+        image : { type : GraphQLString},
+        ingredients : { type : GraphQLList(IngredientType) }
+        
+    })
+})
+
+const IngredientType = new GraphQLObjectType({
+    name : 'Ingredients',
+    fields : () => ({
+        text: {type : GraphQLString}
+    })
+})
+
+
+
+const RootQuery = new GraphQLObjectType({
+    name: 'RootQueryType' ,
+    fields : {
+        
+        food : {
+            type : FoodType,
+            args : {
+                q : {type : GraphQLString},       
+            },
+            resolve(parent, args){
+                return axios.get(`https://api.edamam.com/search?q=${args.q}&app_id=${API_ID}&app_key=${API_KEY}`)
+                .then(res => res.data)
+            }
+        }
+   
+    }
+
+
+})
+
+
+
+module.exports = new GraphQLSchema({
+    query: RootQuery
+});
