@@ -1,7 +1,8 @@
-import React , {useEffect, useState} from 'react';
+import React , { useState, Fragment} from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
+import Items from './items';
 
 
 const FOOD_QUERY = gql`
@@ -24,13 +25,44 @@ const FOOD_QUERY = gql`
 
 const Feed = (props) => {
 
-    console.log(props.match.params);
-    
-    
+    let {q}= props.match.params;
+  
     return (
-        <div className="container">
-           
-        </div>
+      <Fragment> 
+        <Query query={FOOD_QUERY} variables={{q}}>
+
+           {({loading, error, data}) => {
+
+             if(loading) return (
+               <div className="loadercenter">
+                 <i className="fa fa-cog fa-spin fa-5x" />
+               </div>
+             )
+
+             if (error) console.log(error);
+
+            //  let food = data.food.hits;
+             let food = data.food.hits;
+             console.log(food);
+             
+
+             return (
+                <div className='d-flex flex-wrap'>
+                     {food.map( foods => (
+                   
+                   <Items key={foods.recipe.uri} label={foods.recipe.label} image={foods.recipe.image} ingredients={foods.recipe.ingredients} />
+               ))}
+                </div>
+             )
+             
+             
+           }}
+            
+          
+          
+
+        </Query>     
+      </Fragment>
     )
 }
 

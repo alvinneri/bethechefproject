@@ -14,13 +14,13 @@ app.use('/graphql' , graphqlHTTP({
 
 
 
-// if(process.env.NODE_ENV === 'production'){
-//     app.use(express.static('client/build' ));
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build' ));
 
-//     app.get('*', (req,res)=>{
-//         res.sendFile(path.join(__dirname, 'client', 'build' , 'index.html'));
-//     });
-// }
+    app.get('*', (req,res)=>{
+        res.sendFile(path.join(__dirname, 'client', 'build' , 'index.html'));
+    });
+}
 
 app.listen(PORT, () => {
     console.log(`App listening to PORT ${PORT}`);

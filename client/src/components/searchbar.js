@@ -5,15 +5,15 @@ import {useHistory} from 'react-router-dom';
 const SearchBar = () => {
     
     const history = useHistory();
-    const [food, setFood] = useState('');
+    const [q, setQ] = useState('');
 
     const handleChange = (e) => {
-        setFood(e.target.value);
+        setQ(e.target.value);
     }
 
     const onSubmit = (e) => {
-        
-        history.push(`/search/${food}`);
+
+        history.push(`/search/${q}`);
         
     }
 
@@ -22,7 +22,7 @@ const SearchBar = () => {
             <div className="container">
             <form class="form-inline d-flex justify-content-center" onSubmit={onSubmit}>
                 <input class="form-control form-control-sm mr-3 w-75 search-input" type="text" placeholder="Search for a food"
-                aria-label="Search" value={food} onChange={handleChange} />
+                aria-label="Search" value={q} onChange={handleChange} />
                 <i class="fas fa-search" aria-hidden="true"></i>
             </form>
             </div>

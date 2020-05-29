@@ -10,7 +10,8 @@ import SearchBar from './components/searchbar';
 import Feed from './components/feed';
 
 const client = new ApolloClient({
-  uri: `/graphql`
+  
+  uri: `http://localhost:5000/graphql`
 });
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         <Header/>
         <SearchBar />
         <Switch>
-          <Route exact path='/search/:food' component={Feed}/>
+          <Route exact path='/search/:q' component={Feed}/>
         </Switch>
       </Router>
     </ApolloProvider>  
