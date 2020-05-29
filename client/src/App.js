@@ -12,8 +12,8 @@ import Details from './components/details';
 
 const client = new ApolloClient({
   
-  // uri: `http://localhost:5000/graphql`
-  uri: `/graphql`
+  // uri: 'http://localhost:5000/graphql'
+  uri: '/graphql'
 });
 
 function App() {
@@ -23,8 +23,8 @@ function App() {
         <Header/>
         <SearchBar />
         <Switch>
-          <Route exact path='/search/:q' component={Feed}/>
-          <Route exact path='/details/:s' component={Details}/>
+          <Route  path='/search/:q' component={Feed}/>
+          <Route  path='/details/:s' component={Details}/>
         </Switch>
       </Router>
     </ApolloProvider>  
