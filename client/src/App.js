@@ -23,8 +23,8 @@ function App() {
         <Header/>
         <SearchBar />
         <Switch>
-          <Route  path='/search/:q' component={Feed}/>
-          <Route  path='/details/:s' component={Details}/>
+          <Route exact path='/search/:q' component={Feed}/>
+          <Route exact path='/details/:s' component={Details}/>
         </Switch>
       </Router>
     </ApolloProvider>  
